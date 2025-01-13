@@ -1,13 +1,12 @@
 import * as cinemaFactory from "../factory/cinema.factory";
 import { database } from "../config/database";
-import { movie } from "../schema/movie";
 import { eq } from "drizzle-orm/sql/expressions/conditions";
 import { cinema } from "../schema/cinema";
 
 export async function findCinemas() {
     let findCinemasQuery = 'SELECT * FROM "cinema"';
 
-    findCinemasQuery += ' ORDER BY "movie"."id" ASC';
+    findCinemasQuery += ' ORDER BY "cinema"."id" ASC';
 
     try {
         let result = await database.execute(findCinemasQuery);
