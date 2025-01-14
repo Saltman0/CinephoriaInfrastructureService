@@ -4,6 +4,6 @@ import { cinema } from "./cinema";
 export const hall = drizzle.pgTable("hall", {
     id: drizzle.integer().primaryKey().generatedAlwaysAsIdentity(),
     number: drizzle.integer().notNull(),
-    projectionQuality: drizzle.varchar(),
+    projectionQuality: drizzle.varchar().notNull(),
     cinemaId: drizzle.integer().references(() => cinema.id, {onDelete: "cascade"}).notNull()
 });
