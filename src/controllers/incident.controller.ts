@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as incidentRepository from "../repository/incident.repository";
+import {publishMessage} from "../rabbitmq";
 
 export async function getIncidents(req: Request, res: Response) {
     try {
@@ -45,6 +46,8 @@ export async function createIncident(req: Request, res: Response) {
             parseInt(req.params.hallId)
         );
 
+        await publishMessage("incident", JSON.stringify({ type: "incident", event: "create", body: incidentToCreate }));
+
         res.status(201).json(incidentToCreate);
     } catch (error) {
         if (error instanceof Error) {
@@ -62,6 +65,8 @@ export async function updateIncident(req: Request, res: Response) {
             parseInt(req.body.hallId)
         );
 
+        await publishMessage("incident", JSON.stringify({ type: "incident", event: "update", body: incidentToUpdate }));
+
         res.status(200).json(incidentToUpdate);
     } catch (error) {
         if (error instanceof Error) {
@@ -75,6 +80,8 @@ export async function deleteIncident(req: Request, res: Response) {
         const incidentToDelete = await incidentRepository.deleteIncident(
             parseInt(req.params.id)
         );
+
+        await publishMessage("incident", JSON.stringify({ type: "incident", event: "delete", body: incidentToDelete }));
 
         res.status(200).json({ message: "Incident deleted successfully." });
     } catch (error) {
