@@ -62,7 +62,7 @@ export async function updateHall(req: Request, res: Response) {
             parseInt(req.params.id),
             parseInt(req.body.number),
             req.body.projectionQuality,
-            parseInt(req.params.cinemaId)
+            parseInt(req.body.cinemaId)
         );
 
         await publishMessage("hall", JSON.stringify({ type: "hall", event: "update", body: hallToUpdate }));
