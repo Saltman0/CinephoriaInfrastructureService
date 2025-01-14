@@ -6,7 +6,7 @@ import { hall } from "../schema/hall";
 export async function findHalls(cinemaId: number) {
     let findHallsQuery = 'SELECT * FROM "hall"';
 
-    findHallsQuery += ` WHERE cinemaId = ${cinemaId}`;
+    findHallsQuery += ` WHERE "cinemaId" = ${cinemaId}`;
 
     findHallsQuery += ' ORDER BY "hall"."id" ASC';
 
@@ -40,7 +40,7 @@ export async function findHallById(id: number) {
     }
 }
 
-export async function insertHall(number: number, projectionQuality: string|null, cinemaId: number) {
+export async function insertHall(number: number, projectionQuality: string, cinemaId: number) {
     try {
         const preparedInsertHall = await database
             .insert(hall)
