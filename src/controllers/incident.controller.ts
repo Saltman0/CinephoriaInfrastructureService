@@ -59,7 +59,7 @@ export async function updateIncident(req: Request, res: Response) {
             parseInt(req.params.id),
             req.body.type,
             req.body.description,
-            parseInt(req.params.hallId)
+            parseInt(req.body.hallId)
         );
 
         res.status(200).json(incidentToUpdate);
