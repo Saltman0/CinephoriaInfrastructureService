@@ -112,10 +112,10 @@ SAVEPOINT seat_savepoint;
 
 -- Insert incident
 INSERT INTO "incident" ("type", "description", "hallId")
-VALUES ('Endommagement', '25, avenue du Breton', 1),
-       ('Technique', '154, rue du bordeleaux', 8),
-       ('Propreté', '356, avenue de Napoléon', 18),
-       ('Humain', '5, rue de la ville rose', 30);
+VALUES ('Endommagement', 'Quelque chose est cassé dans cette salle.', 1),
+       ('Technique', 'Le film ne démarre pas.', 8),
+       ('Propreté', 'La rangée 1 est sale.', 18),
+       ('Humain', 'Une bagarre a éclaté dans la salle.', 30);
 -- Insert incident
 
 SAVEPOINT seat_savepoint;
