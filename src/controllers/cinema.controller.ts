@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as cinemaRepository from "../repository/cinema.repository";
+import { publishMessage } from "../rabbitmq";
 
 export async function getCinemas(req: Request, res: Response) {
     try {
@@ -47,6 +48,8 @@ export async function createCinema(req: Request, res: Response) {
             req.body.closeHour
         );
 
+        await publishMessage("cinema", JSON.stringify({ type: "cinema", event: "create", body: cinemaToCreate }));
+
         res.status(201).json(cinemaToCreate);
     } catch (error) {
         if (error instanceof Error) {
@@ -68,6 +71,8 @@ export async function updateCinema(req: Request, res: Response) {
             req.body.closeHour
         );
 
+        await publishMessage("cinema", JSON.stringify({ type: "cinema", event: "update", body: cinemaToUpdate }));
+
         res.status(200).json(cinemaToUpdate);
     } catch (error) {
         if (error instanceof Error) {
@@ -81,6 +86,8 @@ export async function deleteCinema(req: Request, res: Response) {
         const cinemaToDelete = await cinemaRepository.deleteCinema(
             parseInt(req.params.id)
         );
+
+        await publishMessage("cinema", JSON.stringify({ type: "cinema", event: "delete", body: cinemaToDelete }));
 
         res.status(200).json({ message: "Cinema deleted successfully." });
     } catch (error) {
