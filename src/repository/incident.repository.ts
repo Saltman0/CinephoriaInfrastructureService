@@ -6,7 +6,7 @@ import { incident } from "../schema/incident";
 export async function findIncidents(hallId: number) {
     let findIncidentsQuery = 'SELECT * FROM "incident"';
 
-    findIncidentsQuery += ` WHERE hallId = ${hallId}`;
+    findIncidentsQuery += ` WHERE "hallId" = ${hallId}`;
 
     findIncidentsQuery += ' ORDER BY "incident"."id" ASC';
 
