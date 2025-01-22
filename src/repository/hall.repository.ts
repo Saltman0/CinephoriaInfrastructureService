@@ -4,11 +4,9 @@ import { eq } from "drizzle-orm/sql/expressions/conditions";
 import { hall } from "../schema/hall";
 
 export async function findHalls(cinemaId: number) {
-    let findHallsQuery = 'SELECT * FROM "hall"';
-
-    findHallsQuery += ` WHERE "cinemaId" = ${cinemaId}`;
-
-    findHallsQuery += ' ORDER BY "hall"."id" ASC';
+    let findHallsQuery = 'SELECT * FROM hall';
+    findHallsQuery += ` WHERE hall."cinemaId" = ${cinemaId}`;
+    findHallsQuery += ' ORDER BY hall."id" ASC';
 
     try {
         let result = await database.execute(findHallsQuery);
