@@ -8,11 +8,7 @@ export async function getHalls(req: Request, res: Response) {
             parseInt(req.params.cinemaId)
         );
 
-        if (halls !== null) {
-            res.status(200).json(halls);
-        } else {
-            res.status(404).json({ message : `Halls not found.` });
-        }
+        res.status(200).json(halls);
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).json({ message: error.message });
@@ -26,11 +22,7 @@ export async function getHallById(req: Request, res: Response) {
             parseInt(req.params.id)
         );
 
-        if (hall !== null) {
-            res.status(200).json(hall);
-        } else {
-            res.status(404).json({ message : `Hall ${req.params.id} not found.` });
-        }
+        res.status(200).json(hall);
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).json({ message: error.message });
