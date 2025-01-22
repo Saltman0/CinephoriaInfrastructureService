@@ -8,11 +8,7 @@ export async function getIncidents(req: Request, res: Response) {
             parseInt(req.params.hallId)
         );
 
-        if (incidents !== null) {
-            res.status(200).json(incidents);
-        } else {
-            res.status(404).json({ message : `Incidents not found.` });
-        }
+        res.status(200).json(incidents);
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).json({ message: error.message });
@@ -26,11 +22,7 @@ export async function getIncidentById(req: Request, res: Response) {
             parseInt(req.params.id)
         );
 
-        if (incident !== null) {
-            res.status(200).json(incident);
-        } else {
-            res.status(404).json({ message : `Incident ${req.params.id} not found.` });
-        }
+        res.status(200).json(incident);
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).json({ message: error.message });
