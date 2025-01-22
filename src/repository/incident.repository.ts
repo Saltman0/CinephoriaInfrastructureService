@@ -13,10 +13,6 @@ export async function findIncidents(hallId: number) {
     try {
         let result = await database.execute(findIncidentsQuery);
 
-        if (result.rows.length === 0) {
-            return null;
-        }
-
         return result.rows;
     } catch (error) {
         throw error;
