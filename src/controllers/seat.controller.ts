@@ -67,7 +67,7 @@ export async function updateSeat(req: Request, res: Response) {
     }
 }
 
-export async function deleteHall(req: Request, res: Response) {
+export async function deleteSeat(req: Request, res: Response) {
     try {
         const seatToDelete = await seatRepository.deleteSeat(
             parseInt(req.params.id)
