@@ -6,6 +6,7 @@ import passport from "./middleware/passport";
 import cinemaRoutes from "./routes/cinema.routes";
 import hallRoutes from "./routes/hall.routes";
 import incidentRoutes from "./routes/incident.routes";
+import seatRoutes from "./routes/seat.routes";
 
 
 export const port: number = parseInt(process.env.PORT as string) || 3000;
@@ -27,6 +28,7 @@ app.use(passport.initialize());
 
 app.use(cinemaRoutes);
 app.use(hallRoutes);
+app.use(seatRoutes);
 app.use(incidentRoutes);
 
 await subscribeToMessages("movie");
