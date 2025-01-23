@@ -2,18 +2,15 @@ import * as incidentFactory from "../factory/incident.factory";
 import { database } from "../config/database";
 import { eq } from "drizzle-orm/sql/expressions/conditions";
 import { incident } from "../schema/incident";
+import { asc } from "drizzle-orm/sql/expressions/select";
 
 export async function findIncidents(hallId: number) {
-    let findIncidentsQuery = 'SELECT * FROM "incident"';
-
-    findIncidentsQuery += ` WHERE "hallId" = ${hallId}`;
-
-    findIncidentsQuery += ' ORDER BY "incident"."id" ASC';
-
     try {
-        let result = await database.execute(findIncidentsQuery);
-
-        return result.rows;
+        return await database
+            .select()
+            .from(incident)
+            .where(eq(incident.hallId, hallId))
+            .orderBy(asc(incident.id));
     } catch (error) {
         throw error;
     }
