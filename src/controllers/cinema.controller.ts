@@ -21,7 +21,7 @@ export async function getCinemas(req: Request, res: Response) {
 export async function getCinemaById(req: Request, res: Response) {
     try {
         const cinema = await cinemaRepository.findCinemaById(
-            parseInt(req.params.id)
+            parseInt(req.params.cinemaId)
         );
 
         if (cinema !== null) {
@@ -61,7 +61,7 @@ export async function createCinema(req: Request, res: Response) {
 export async function updateCinema(req: Request, res: Response) {
     try {
         const cinemaToUpdate = await cinemaRepository.updateCinema(
-            parseInt(req.params.id),
+            parseInt(req.params.cinemaId),
             req.body.name,
             req.body.address,
             parseInt(req.body.postalCode),
@@ -84,7 +84,7 @@ export async function updateCinema(req: Request, res: Response) {
 export async function deleteCinema(req: Request, res: Response) {
     try {
         const cinemaToDelete = await cinemaRepository.deleteCinema(
-            parseInt(req.params.id)
+            parseInt(req.params.cinemaId)
         );
 
         await publishMessage("cinema", JSON.stringify({ type: "cinema", event: "delete", body: cinemaToDelete }));

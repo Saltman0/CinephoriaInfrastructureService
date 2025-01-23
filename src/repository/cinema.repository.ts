@@ -2,20 +2,14 @@ import * as cinemaFactory from "../factory/cinema.factory";
 import { database } from "../config/database";
 import { eq } from "drizzle-orm/sql/expressions/conditions";
 import { cinema } from "../schema/cinema";
+import { asc } from "drizzle-orm/sql/expressions/select";
 
 export async function findCinemas() {
-    let findCinemasQuery = 'SELECT * FROM "cinema"';
-
-    findCinemasQuery += ' ORDER BY "cinema"."id" ASC';
-
     try {
-        let result = await database.execute(findCinemasQuery);
-
-        if (result.rows.length === 0) {
-            return null;
-        }
-
-        return result.rows;
+        return await database
+            .select()
+            .from(cinema)
+            .orderBy(asc(cinema.id));
     } catch (error) {
         throw error;
     }
