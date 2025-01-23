@@ -19,7 +19,7 @@ export async function getHalls(req: Request, res: Response) {
 export async function getHallById(req: Request, res: Response) {
     try {
         const hall = await hallRepository.findHallById(
-            parseInt(req.params.id)
+            parseInt(req.params.hallId)
         );
 
         res.status(200).json(hall);
@@ -51,7 +51,7 @@ export async function createHall(req: Request, res: Response) {
 export async function updateHall(req: Request, res: Response) {
     try {
         const hallToUpdate = await hallRepository.updateHall(
-            parseInt(req.params.id),
+            parseInt(req.params.hallId),
             parseInt(req.body.number),
             req.body.projectionQuality,
             parseInt(req.body.cinemaId)
@@ -70,7 +70,7 @@ export async function updateHall(req: Request, res: Response) {
 export async function deleteHall(req: Request, res: Response) {
     try {
         const hallToDelete = await hallRepository.deleteHall(
-            parseInt(req.params.id)
+            parseInt(req.params.hallId)
         );
 
         await publishMessage("hall", JSON.stringify({ type: "hall", event: "delete", body: hallToDelete }));
