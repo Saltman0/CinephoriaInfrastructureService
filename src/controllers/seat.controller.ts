@@ -35,7 +35,7 @@ export async function createSeat(req: Request, res: Response) {
         const seatToCreate = await seatRepository.insertSeat(
             req.body.row,
             parseInt(req.body.number),
-            parseInt(req.params.hallId)
+            parseInt(req.body.hallId)
         );
 
         await publishMessage("seat", JSON.stringify({ type: "seat", event: "create", body: seatToCreate }));
@@ -51,7 +51,7 @@ export async function createSeat(req: Request, res: Response) {
 export async function updateSeat(req: Request, res: Response) {
     try {
         const seatToUpdate = await seatRepository.updateSeat(
-            parseInt(req.params.id),
+            parseInt(req.params.seatId),
             req.body.row,
             parseInt(req.body.number),
             parseInt(req.body.hallId)
@@ -70,7 +70,7 @@ export async function updateSeat(req: Request, res: Response) {
 export async function deleteSeat(req: Request, res: Response) {
     try {
         const seatToDelete = await seatRepository.deleteSeat(
-            parseInt(req.params.id)
+            parseInt(req.params.seatId)
         );
 
         await publishMessage("hall", JSON.stringify({ type: "seat", event: "delete", body: seatToDelete }));
