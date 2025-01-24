@@ -35,7 +35,7 @@ export async function createIncident(req: Request, res: Response) {
         const incidentToCreate = await incidentRepository.insertIncident(
             req.body.type,
             req.body.description,
-            parseInt(req.params.hallId)
+            parseInt(req.body.hallId)
         );
 
         await publishMessage("incident", JSON.stringify({ type: "incident", event: "create", body: incidentToCreate }));
