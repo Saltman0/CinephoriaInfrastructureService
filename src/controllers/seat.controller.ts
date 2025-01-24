@@ -19,7 +19,7 @@ export async function getSeats(req: Request, res: Response) {
 export async function getSeatById(req: Request, res: Response) {
     try {
         const hall = await seatRepository.findSeatById(
-            parseInt(req.params.id)
+            parseInt(req.params.seatId)
         );
 
         res.status(200).json(hall);
