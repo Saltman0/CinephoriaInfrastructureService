@@ -6,7 +6,7 @@ const router: Router = Router();
 
 router.get("/cinema/:cinemaId/hall", passport.authenticate("jwt", { session: false }), hallController.getHalls);
 router.get("/hall/:hallId", passport.authenticate("jwt", { session: false }), hallController.getHallById);
-router.post("/cinema/:cinemaId/hall", passport.authenticate("jwt", { session: false }), hallController.createHall);
+router.post("/hall/:hallId", passport.authenticate("jwt", { session: false }), hallController.createHall);
 router.put("/hall/:hallId", passport.authenticate("jwt", { session: false }), hallController.updateHall);
 router.delete("/hall/:hallId", passport.authenticate("jwt", { session: false }), hallController.deleteHall);
 

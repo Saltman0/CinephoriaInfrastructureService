@@ -35,7 +35,7 @@ export async function createHall(req: Request, res: Response) {
         const hallToCreate = await hallRepository.insertHall(
             parseInt(req.body.number),
             req.body.projectionQuality,
-            parseInt(req.params.cinemaId)
+            parseInt(req.body.cinemaId)
         );
 
         await publishMessage("hall", JSON.stringify({ type: "hall", event: "create", body: hallToCreate }));
