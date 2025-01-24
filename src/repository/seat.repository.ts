@@ -2,22 +2,15 @@ import * as seatFactory from "../factory/seat.factory";
 import { database } from "../config/database";
 import { eq } from "drizzle-orm/sql/expressions/conditions";
 import { seat } from "../schema/seat";
+import { asc } from "drizzle-orm/sql/expressions/select";
 
-export async function findSeats(hallId: number|null) {
-    let findSeatsQuery = 'SELECT * FROM seat';
-    if (hallId !== null) {
-        findSeatsQuery += ` WHERE seat."hallId" = ${hallId}`;
-    }
-    findSeatsQuery += ' ORDER BY seat."id" ASC';
-
+export async function findSeats(hallId: number) {
     try {
-        let result = await database.execute(findSeatsQuery);
-
-        if (result.rows.length === 0) {
-            return null;
-        }
-
-        return result.rows;
+        return await database
+            .select()
+            .from(seat)
+            .where(eq(seat.hallId, hallId))
+            .orderBy(asc(seat.id));
     } catch (error) {
         throw error;
     }
