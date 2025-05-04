@@ -5,5 +5,7 @@ export const incident = drizzle.pgTable("incident", {
     id: drizzle.integer().primaryKey().generatedAlwaysAsIdentity(),
     type: drizzle.varchar().notNull(),
     description: drizzle.varchar().notNull(),
+    date: drizzle.timestamp().notNull(),
+    solved: drizzle.boolean().notNull(),
     hallId: drizzle.integer().references(() => hall.id, {onDelete: "cascade"}).notNull()
 });
