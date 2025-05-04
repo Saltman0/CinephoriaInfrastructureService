@@ -63,14 +63,14 @@ VALUES ('A', 1, 1),
 SAVEPOINT seat_savepoint;
 
 -- Insert incident
-INSERT INTO "incident" ("type", "description", "hallId")
-VALUES ('Endommagement', 'Quelque chose est cassé dans cette salle.', 1),
-       ('Technique', 'Le film ne démarre pas.', 2),
-       ('Propreté', 'La rangée 1 est sale.', 4),
-       ('Humain', 'Une bagarre a éclaté dans la salle.', 5);
+INSERT INTO "incident" ("type", "description", "date", "solved", "hallId")
+VALUES ('Endommagement', 'Quelque chose est cassé dans cette salle.', '2025-05-04 12:15:00', false, 1),
+       ('Technique', 'Le film ne démarre pas.', '2025-05-02 14:30:00', true, 2),
+       ('Propreté', 'La rangée 1 est sale.', '2025-05-03 10:10:00', true, 4),
+       ('Humain', 'Une bagarre a éclaté dans la salle.', '2025-05-04 16:20:00', false, 5);
 -- Insert incident
 
-SAVEPOINT seat_savepoint;
+SAVEPOINT incident_savepoint;
 
 -- Insert movie
 INSERT INTO "movie" ("title", "description", "minimumAge", "favorite", "imageURL")

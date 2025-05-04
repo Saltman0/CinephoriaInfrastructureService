@@ -46,6 +46,8 @@ CREATE TABLE IF NOT EXISTS "incident" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR NOT NULL,
     "description" VARCHAR NOT NULL,
+    "date" TIMESTAMP NOT NULL,
+    "solved" BOOLEAN NOT NULL,
     "hallId" INTEGER NOT NULL
     );
 -- Incident table
