@@ -35,10 +35,12 @@ export async function createIncident(req: Request, res: Response) {
         const incidentToCreate = await incidentRepository.insertIncident(
             req.body.type,
             req.body.description,
+            new Date(req.body.date),
+            req.body.solved,
             parseInt(req.body.hallId)
         );
 
-        await publishMessage("incident", JSON.stringify({ type: "incident", event: "create", body: incidentToCreate }));
+        //await publishMessage("incident", JSON.stringify({ type: "incident", event: "create", body: incidentToCreate }));
 
         res.status(201).json(incidentToCreate);
     } catch (error) {
@@ -54,10 +56,12 @@ export async function updateIncident(req: Request, res: Response) {
             parseInt(req.params.incidentId),
             req.body.type,
             req.body.description,
+            req.body.date,
+            req.body.solved,
             parseInt(req.body.hallId)
         );
 
-        await publishMessage("incident", JSON.stringify({ type: "incident", event: "update", body: incidentToUpdate }));
+        //await publishMessage("incident", JSON.stringify({ type: "incident", event: "update", body: incidentToUpdate }));
 
         res.status(200).json(incidentToUpdate);
     } catch (error) {

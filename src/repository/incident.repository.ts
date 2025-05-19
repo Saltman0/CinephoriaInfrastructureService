@@ -33,11 +33,11 @@ export async function findIncidentById(id: number) {
     }
 }
 
-export async function insertIncident(type: string, description: string, hallId: number) {
+export async function insertIncident(type: string, description: string, date: Date, solved: boolean, hallId: number) {
     try {
         const preparedInsertIncident = await database
             .insert(incident)
-            .values(incidentFactory.createIncident(type, description, hallId))
+            .values(incidentFactory.createIncident(type, description, date, solved, hallId))
             .returning();
 
         return preparedInsertIncident[0];
@@ -46,13 +46,16 @@ export async function insertIncident(type: string, description: string, hallId: 
     }
 }
 
-export async function updateIncident(id: number, type: string|null, description: string|null, hallId: number|null) {
+export async function updateIncident(id: number, type: string|null, description: string|null, date: Date|null,
+                                     solved: boolean|null, hallId: number|null) {
     try {
         const preparedUpdateIncident = await database
             .update(incident)
             .set({
                 type: type ?? undefined,
                 description: description ?? undefined,
+                date: date ?? undefined,
+                solved: solved ?? undefined,
                 hallId: hallId ?? undefined
             })
             .where(eq(incident.id, id))
