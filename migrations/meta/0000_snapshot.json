@@ -1,5 +1,5 @@
 {
-  "id": "a07157dc-2b5f-40f4-9306-5898c2d9fb86",
+  "id": "2e0e5e24-8fd4-4679-a5b1-c241565f13bb",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -105,7 +105,7 @@
           "name": "projectionQuality",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "cinemaId": {
           "name": "cinemaId",
@@ -167,6 +167,18 @@
           "primaryKey": false,
           "notNull": true
         },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "solved": {
+          "name": "solved",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
         "hallId": {
           "name": "hallId",
           "type": "integer",
@@ -194,8 +206,8 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "public.movie": {
-      "name": "movie",
+    "public.seat": {
+      "name": "seat",
       "schema": "",
       "columns": {
         "id": {
@@ -205,7 +217,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "movie_id_seq",
+            "name": "seat_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -215,92 +227,14 @@
             "cycle": false
           }
         },
-        "title": {
-          "name": "title",
+        "row": {
+          "name": "row",
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
         },
-        "description": {
-          "name": "description",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "minimumAge": {
-          "name": "minimumAge",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "favorite": {
-          "name": "favorite",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "imageURL": {
-          "name": "imageURL",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "movie_imageURL_unique": {
-          "name": "movie_imageURL_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "imageURL"
-          ]
-        }
-      },
-      "checkConstraints": {}
-    },
-    "public.showtime": {
-      "name": "showtime",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "showtime_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
-        },
-        "startTime": {
-          "name": "startTime",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "endTime": {
-          "name": "endTime",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "price": {
-          "name": "price",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "movieId": {
-          "name": "movieId",
+        "number": {
+          "name": "number",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -314,22 +248,9 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "showtime_movieId_movie_id_fk": {
-          "name": "showtime_movieId_movie_id_fk",
-          "tableFrom": "showtime",
-          "tableTo": "movie",
-          "columnsFrom": [
-            "movieId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "showtime_hallId_hall_id_fk": {
-          "name": "showtime_hallId_hall_id_fk",
-          "tableFrom": "showtime",
+        "seat_hallId_hall_id_fk": {
+          "name": "seat_hallId_hall_id_fk",
+          "tableFrom": "seat",
           "tableTo": "hall",
           "columnsFrom": [
             "hallId"

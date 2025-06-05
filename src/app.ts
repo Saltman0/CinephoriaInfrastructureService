@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
 import pino from "pino";
-import { subscribeToMessages } from "./rabbitmq";
 import passport from "./middleware/passport";
 import cinemaRoutes from "./routes/cinema.routes";
 import hallRoutes from "./routes/hall.routes";
@@ -30,6 +29,3 @@ app.use(cinemaRoutes);
 app.use(hallRoutes);
 app.use(seatRoutes);
 app.use(incidentRoutes);
-
-await subscribeToMessages("movie");
-await subscribeToMessages("showtime");

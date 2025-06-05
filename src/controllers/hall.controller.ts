@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import * as hallRepository from "../repository/hall.repository";
-import { publishMessage } from "../rabbitmq";
 
 export async function getHalls(req: Request, res: Response) {
     try {
@@ -38,8 +37,6 @@ export async function createHall(req: Request, res: Response) {
             parseInt(req.body.cinemaId)
         );
 
-        await publishMessage("hall", JSON.stringify({ type: "hall", event: "create", body: hallToCreate }));
-
         res.status(201).json(hallToCreate);
     } catch (error) {
         if (error instanceof Error) {
@@ -57,8 +54,6 @@ export async function updateHall(req: Request, res: Response) {
             parseInt(req.body.cinemaId)
         );
 
-        await publishMessage("hall", JSON.stringify({ type: "hall", event: "update", body: hallToUpdate }));
-
         res.status(200).json(hallToUpdate);
     } catch (error) {
         if (error instanceof Error) {
@@ -69,11 +64,7 @@ export async function updateHall(req: Request, res: Response) {
 
 export async function deleteHall(req: Request, res: Response) {
     try {
-        const hallToDelete = await hallRepository.deleteHall(
-            parseInt(req.params.hallId)
-        );
-
-        await publishMessage("hall", JSON.stringify({ type: "hall", event: "delete", body: hallToDelete }));
+        await hallRepository.deleteHall(parseInt(req.params.hallId));
 
         res.status(200).json({ message: "Hall deleted successfully." });
     } catch (error) {
