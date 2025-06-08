@@ -1,8 +1,3 @@
--- Cinéphoria movie service database
-DROP DATABASE IF EXISTS "cinephoriaInfrastructureServiceDatabase";
-CREATE DATABASE "cinephoriaInfrastructureServiceDatabase";
--- Cinéphoria movie service database
-
 -- Cinema table
 DROP TABLE IF EXISTS "cinema";
 CREATE TABLE IF NOT EXISTS "cinema"
@@ -25,7 +20,7 @@ CREATE TABLE IF NOT EXISTS "hall"
     "id" SERIAL PRIMARY KEY,
     "number" INTEGER NOT NULL,
     "projectionQuality" VARCHAR,
-    "cinemaId" INTEGER REFERENCES "cinema"(id) ON UPDATE NO ACTION ON DELETE CASCADE
+    "cinemaId" INTEGER NOT NULL
 );
 -- Hall table
 
@@ -36,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "seat"
     "id" SERIAL PRIMARY KEY,
     "row" VARCHAR NOT NULL,
     "number" INTEGER NOT NULL,
-    "hallId" INTEGER REFERENCES "hall"(id) ON UPDATE NO ACTION ON DELETE CASCADE
+    "hallId" INTEGER NOT NULL
     );
 -- Seat table
 
