@@ -3,8 +3,10 @@ import * as seatRepository from "../repository/seat.repository";
 
 export async function getSeats(req: Request, res: Response) {
     try {
+        let hallId: string|null = <string>req.query.hallId ?? null;
+
         const seats = await seatRepository.findSeats(
-            parseInt(req.params.hallId)
+            hallId !== null ? parseInt(hallId) : null
         );
 
         res.status(200).json(seats);
