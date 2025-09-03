@@ -3,8 +3,10 @@ import * as incidentRepository from "../repository/incident.repository";
 
 export async function getIncidents(req: Request, res: Response) {
     try {
+        let hallId: string|null = <string>req.query.hallId ?? null;
+
         const incidents = await incidentRepository.findIncidents(
-            parseInt(req.params.hallId)
+            hallId !== null ? parseInt(hallId) : null
         );
 
         res.status(200).json(incidents);

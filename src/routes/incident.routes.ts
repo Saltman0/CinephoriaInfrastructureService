@@ -4,8 +4,8 @@ import * as incidentController from "../controllers/incident.controller";
 
 const router: Router = Router();
 
-router.get("/hall/:hallId/incident", passport.authenticate("jwt", { session: false }), incidentController.getIncidents);
-router.get("/incident/:incidentId", passport.authenticate("jwt", { session: false }), incidentController.getIncidentById);
+router.get("/incident", incidentController.getIncidents);
+router.get("/incident/:incidentId", incidentController.getIncidentById);
 router.post("/incident", passport.authenticate("jwt", { session: false }), incidentController.createIncident);
 router.put("/incident/:incidentId", passport.authenticate("jwt", { session: false }), incidentController.updateIncident);
 router.delete("/incident/:incidentId", passport.authenticate("jwt", { session: false }), incidentController.deleteIncident);

@@ -4,12 +4,19 @@ import { eq } from "drizzle-orm/sql/expressions/conditions";
 import { incident } from "../schema/incident";
 import { asc } from "drizzle-orm/sql/expressions/select";
 
-export async function findIncidents(hallId: number) {
+export async function findIncidents(hallId: number|null) {
     try {
+        if (hallId !== null) {
+            return await database
+                .select()
+                .from(incident)
+                .where(eq(incident.hallId, hallId))
+                .orderBy(asc(incident.id));
+        }
+
         return await database
             .select()
             .from(incident)
-            .where(eq(incident.hallId, hallId))
             .orderBy(asc(incident.id));
     } catch (error) {
         throw error;
