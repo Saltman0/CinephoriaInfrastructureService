@@ -4,12 +4,19 @@ import { eq } from "drizzle-orm/sql/expressions/conditions";
 import { hall } from "../schema/hall";
 import { asc } from "drizzle-orm/sql/expressions/select";
 
-export async function findHalls(cinemaId: number) {
+export async function findHalls(cinemaId: number|null) {
     try {
+        if (cinemaId !== null) {
+            return await database
+                .select()
+                .from(hall)
+                .where(eq(hall.cinemaId, cinemaId))
+                .orderBy(asc(hall.id));
+        }
+
         return await database
             .select()
             .from(hall)
-            .where(eq(hall.cinemaId, cinemaId))
             .orderBy(asc(hall.id));
     } catch (error) {
         throw error;

@@ -3,8 +3,10 @@ import * as hallRepository from "../repository/hall.repository";
 
 export async function getHalls(req: Request, res: Response) {
     try {
+        let cinemaId: string|null = <string>req.query.cinemaId ?? null;
+
         const halls = await hallRepository.findHalls(
-            parseInt(req.params.cinemaId)
+            cinemaId !== null ? parseInt(cinemaId) : null
         );
 
         res.status(200).json(halls);
