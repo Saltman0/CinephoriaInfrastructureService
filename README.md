@@ -20,7 +20,7 @@ Lancez la commande suivante pour générer les librairies nécessaires au bon fo
 
 ### Variables d'environnement
 
-Vous aurez besoin de générer un fichier `.env.local` avec des différentes variables d'environnement pour mettre en
+Vous aurez besoin de générer un fichier `.env.local` avec différentes variables d'environnement pour mettre en
 marche le microservice **Cinéphoria Infrastructure**.
 Un fichier `.env` est disponible dans le projet.
 
