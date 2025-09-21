@@ -24,6 +24,18 @@ CREATE TABLE IF NOT EXISTS "hall"
 );
 -- Hall table
 
+-- Incident table
+DROP TABLE IF EXISTS "incident";
+CREATE TABLE IF NOT EXISTS "incident" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR NOT NULL,
+    "description" VARCHAR NOT NULL,
+    "date" TIMESTAMP NOT NULL,
+    "solved" BOOLEAN NOT NULL,
+    "hallId" INTEGER NOT NULL
+);
+-- Incident table
+
 -- Seat table
 DROP TABLE IF EXISTS "seat";
 CREATE TABLE IF NOT EXISTS "seat"
@@ -34,15 +46,3 @@ CREATE TABLE IF NOT EXISTS "seat"
     "hallId" INTEGER NOT NULL
     );
 -- Seat table
-
--- Incident table
-DROP TABLE IF EXISTS "incident";
-CREATE TABLE IF NOT EXISTS "incident" (
-    "id" SERIAL PRIMARY KEY,
-    "type" VARCHAR NOT NULL,
-    "description" VARCHAR NOT NULL,
-    "date" TIMESTAMP NOT NULL,
-    "solved" BOOLEAN NOT NULL,
-    "hallId" INTEGER NOT NULL
-    );
--- Incident table
