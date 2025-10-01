@@ -17,7 +17,7 @@ jobs:
     uses: ./.github/workflows/docker.yml
     needs: tag
     with:
-      image: saltman0/cinephoria-booking
+      image: saltman0/cinephoria-infrastructure
       tag: ${{ needs.tag.outputs.package_version }}
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
