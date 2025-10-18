@@ -10,10 +10,10 @@ BEGIN;
     INSERT INTO "hall" ("number", "projectionQuality", "cinemaId")
     VALUES (1, 'IMAX', 1),
            (2, '4DX', 1),
-           (1, 'Standard', 1),
-           (2, 'IMAX', 1),
-           (1, 'Dolby Atmos', 1),
-           (2, 'Standard', 1)
+           (3, 'Standard', 1),
+           (4, 'IMAX', 1),
+           (5, 'Dolby Atmos', 1),
+           (6, 'Standard', 1)
     ;
 
     -- Seats
