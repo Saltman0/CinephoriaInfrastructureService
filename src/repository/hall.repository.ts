@@ -1,8 +1,9 @@
+import {eq} from "drizzle-orm/sql/expressions/conditions";
+import {asc} from "drizzle-orm/sql/expressions/select";
+import {sql} from "drizzle-orm";
 import * as hallFactory from "../factory/hall.factory";
-import { database } from "../config/database";
-import { eq } from "drizzle-orm/sql/expressions/conditions";
-import { hall } from "../schema/hall";
-import { asc } from "drizzle-orm/sql/expressions/select";
+import {database} from "../config/database";
+import {hall} from "../schema/hall";
 
 export async function findHalls(cinemaId: number|null) {
     try {
@@ -23,18 +24,15 @@ export async function findHalls(cinemaId: number|null) {
     }
 }
 
-export async function findHallById(id: number) {
+export async function findHallById(id: number, cinemaId: number|null) {
     try {
-        const result = await database
-            .select()
-            .from(hall)
-            .where(eq(hall.id, id));
+        let request: string = `SELECT * FROM "hall" WHERE "hall"."id" = ${id}`;
 
-        if (result.length === 0) {
-            return null;
+        if (cinemaId !== null) {
+            request += ` AND "hall"."cinemaId" = ${cinemaId}`;
         }
 
-        return result[0];
+        return await database.execute(sql.raw(request));
     } catch (error) {
         throw error;
     }

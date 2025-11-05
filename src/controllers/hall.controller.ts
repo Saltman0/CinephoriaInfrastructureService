@@ -19,11 +19,14 @@ export async function getHalls(req: Request, res: Response) {
 
 export async function getHallById(req: Request, res: Response) {
     try {
+        let cinemaId: string|null = <string>req.query.cinemaId ?? null;
+
         const hall = await hallRepository.findHallById(
-            parseInt(req.params.hallId)
+            parseInt(req.params.hallId),
+            cinemaId !== null ? parseInt(cinemaId) : null
         );
 
-        res.status(200).json(hall);
+        res.status(200).json(hall.rows[0] ?? null);
     } catch (error) {
         if (error instanceof Error) {
             res.status(500).json({ message: error.message });
