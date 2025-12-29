@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS "hall"
     "id" SERIAL PRIMARY KEY,
     "number" INTEGER NOT NULL,
     "projectionQuality" VARCHAR,
-    "cinemaId" INTEGER NOT NULL
+    "cinemaId" INTEGER NOT NULL REFERENCES cinema(id) ON DELETE CASCADE,
 );
 -- Hall table
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS "incident" (
     "description" VARCHAR NOT NULL,
     "date" TIMESTAMP NOT NULL,
     "solved" BOOLEAN NOT NULL,
-    "hallId" INTEGER NOT NULL
+    "hallId" INTEGER NOT NULL REFERENCES hall(id) ON DELETE CASCADE
 );
 -- Incident table
 
@@ -43,6 +43,6 @@ CREATE TABLE IF NOT EXISTS "seat"
     "id" SERIAL PRIMARY KEY,
     "row" VARCHAR NOT NULL,
     "number" INTEGER NOT NULL,
-    "hallId" INTEGER NOT NULL
+    "hallId" INTEGER NOT NULL REFERENCES hall(id) ON DELETE CASCADE
     );
 -- Seat table
